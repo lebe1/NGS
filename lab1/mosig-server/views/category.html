@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="Demo" />
+  <meta name="author" content="UGA/IUT2/INFO/Philippe Martin" />
+  <title>Accueil</title>
+  <!-- CSS : Bootstrap, Fontawsome, projet (styles communs à tout le projet) -->
+  <link href="/vendors/bootstrap/bootstrap.min.css" rel="stylesheet" />
+  <link href="/vendors/fontawesome/fontawesome-5.all.min.css" rel="stylesheet" />
+  <link href="/css/projet.css" rel="stylesheet" />
+  <!-- debut du block css -->
+  <!-- fin du block css -->
+</head>
+
+<body>
+  <!-- debut de la navbar -->
+
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="/"> <i class="fas fa-home"></i> Demo </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+      aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/categories/">
+            <i class="fas fa-store"></i> Shop
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/basket/">
+            <i class="fas fa-shopping-cart"></i> 0 Product(s)
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/contact/">
+            <i class="fas fa-comments"></i> Contact
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav my-0">
+        <li class="nav-item dropdown">
+          <span class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            EUR
+          </span>
+          <div class="dropdown-menu" aria-labelledby="dropdown02" style="min-width: 5rem"><a class="dropdown-item"
+              href="/change_currency/EUR"></a>
+            EUR
+            </a>
+            <a class="dropdown-item" href="/change_currency/CAD">
+              CAD
+            </a>
+            <a class="dropdown-item" href="/change_currency/USD">
+              USD
+            </a>
+            <a class="dropdown-item" href="/change_currency/GBP">
+              GBP
+            </a>
+            <a class="dropdown-item" href="/change_currency/PHP">
+              PHP
+            </a>
+            <a class="dropdown-item" href="/change_currency/IDR">
+              IDR
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- fin de la navbar -->
+  <main role="main" class="container-fluid">
+    <div class="row">
+      <div class="col-md-10">
+        <div class="main-div">
+          <!-- debut du block body -->
+          <div class="card col-md-12">
+            <div class="card-header">
+              <h1>
+                <i class="fas fa-store"></i> Category "{{category_name}}" : {{product_number}} Product(s)
+              </h1>
+            </div>
+            <div class="card-body row">
+              {{#products}}
+              <div class="col-md-4">
+                <a class="card clickable" href="/basket/add/{{id}}">
+                  <img src="{{image}}" class="card-img-produit" alt="{{name}}" />
+                  <div class="card-body">
+                    <h4 class="card-title">{{name}}</h4>
+                    <h2>
+                      <span class="badge badge-primary">
+                        <i class="fas fa-cart-plus"></i>&nbsp;&nbsp;
+                        {{price}}&nbsp;{{currency}}
+                      </span>
+                    </h2>
+                  </div>
+                </a>
+              </div>
+              {{/products}}
+            </div>
+          </div>
+          <!-- fin du block body -->
+        </div>
+      </div>
+      <div class="col-md-2" style="padding: 10px">
+        <div class="card">
+          <div class="card-header text-center">
+            <h4>
+              <i class="fas fa-star"></i> Top sells
+              <i class="fas fa-star"></i>
+            </h4>
+          </div>
+          <div class="card-body">
+            <ul class="list-group">
+              {{#top_sells}}
+              <a href="{{url}}">
+                <li class="list-group-item text-center clickable">
+                  <img src="{{image}}" style="height: 40px" />
+                  <p>{{name}}<br /><i>{{number}} sells</i></p>
+                </li>
+              </a>
+              {{/top_sells}}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- JS : JQuery, Bootstrap -->
+  <script src="/vendors/jquery/jquery.slim.min.js"></script>
+  <script src="/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
