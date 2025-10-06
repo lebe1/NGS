@@ -46,11 +46,11 @@ app.get('/categories', (req, res) => {
 app.get('/categories/:categoryName', (req, res) => {
   const categoryName = req.params.categoryName;
   
-  // Valid categories
-  const validCategories = ['fruits', 'vegetables', 'virus', 'junk_food'];
+  // Find the category in the data
+  const category = data.categories.find(c => c.id === categoryName);
   
   // Check if the requested category exists
-  if (!validCategories.includes(categoryName)) {
+  if (!category) {
     return res.status(404).send('Category not found');
   }
   
@@ -63,15 +63,22 @@ app.get('/categories/:categoryName', (req, res) => {
         res.status(500).send('Server error');
       }
     } else {
-      // Prepare data for the specific category
-      const categoryData = {
+      // Filter products for this category and format prices
+      const products = category.products.map(product => ({
+        ...product,
+        price: `${product.price.EUR}€`
+      }));
+      
+      // Prepare view data for Mustache
+      const viewData = {
         ...data,
-        currentCategory: categoryName,
-        // If your data.js has category-specific data, you can filter it here
-        // For example: items: data.items.filter(item => item.category === categoryName)
+        category_name: category.name,
+        product_number: products.length,
+        products
       };
       
-      const output = Mustache.render(template, categoryData);
+      const output = Mustache.render(template, viewData);
+      res.setHeader('Content-Type', 'text/html');
       res.send(output);
     }
   });
